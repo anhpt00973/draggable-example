@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <a href="https://github.com/David-Desmaisons/draggable-example" target="_blank">
+      <!-- <a href="https://github.com/David-Desmaisons/draggable-example" target="_blank">
       <img
         style="position: fixed; top: 0; right: 0; border: 0; z-index:99999"
         width="149"
@@ -10,21 +10,23 @@
         alt="Fork me on GitHub"
         data-recalc-dims="1"
       />
-    </a>
-    <div class="jumbotron logo">
+      </a> -->
+    <!-- <div class="jumbotron logo">
       <img src="./assets/logo.png">
-    </div>
+    </div> -->
     <hello></hello>
+    <radial-chart/>
   </div>
 </template>
 
 <script>
 import Hello from "./components/Hello";
-
+import RadialChartVue from "./views/RadialChart.vue";
 export default {
   name: "app",
   components: {
-    Hello
+    Hello,
+    'radial-chart' : RadialChartVue
   }
 };
 </script>
