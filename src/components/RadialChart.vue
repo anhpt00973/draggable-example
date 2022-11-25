@@ -1,5 +1,7 @@
 <template>
-	<div :id="id" class="className" :style="{height:height,width:width}" />
+<!-- <div> -->
+	<div :id="divId" :valueX="valueX" class="className" :style="{height:height,width:width}" />
+<!-- </div> -->
 </template>
 
 <script>
@@ -9,56 +11,68 @@ import resize from './mixins/resize'
 export default {
 	// mixins: [resize],
 	props: {
-	className: {
-		type: String,
-		default: 'chart'
-	},
-	id: {
-		type: String,
-		default: 'chart'
-	},
-	width: {
-		type: String,
-		default: '200px'
-	},
-	height: {
-		type: String,
-		default: '200px'
-	}
+		className: {
+			type: String,
+			default: 'chart'
+		},
+		id: {
+			type: String,
+			default: 'chart'
+		},
+		width: {
+			type: String,
+			default: '200px'
+		},
+		height: {
+			type: String,
+			default: '200px'
+		},
+		divId: {
+			type: String,
+			default: '0' 
+		},
+		valueX: {
+			type: String,
+			default: '0'
+		}
 	},
 	data() {
 		return {
-			chart: null,
+			myChart: null,
 			value: 30, 
 			valueColor: 'red',
 			insideColor: ['blue', 'grey'],
 			outsideValue1: 80, outsideValue2: 10,
-			outsideColor: [ 'green', 'orange', 'red'],
+			outsideColor: [ 'green', 'orange', 'red']
+			
 		}
 	},
 	mounted() {
-		this.initChart()
+		let vm = this
+		vm.initChart(vm.divId, vm.valueX)
 	},
 	beforeDestroy() {
-		if (!this.chart) {
+		let vm = this
+		if (!vm.myChart) {
 			return
 		}
-		this.chart.dispose()
-		this.chart = null
+		vm.myChart.dispose()
+		vm.myChart = null
 	},
 	methods: {
-		initChart() {
-			this.chart = echarts.init(document.getElementById(this.id))
-			this.chart.setOption({
+		initChart(divId, valueX) {
+			let vm = this
+			vm.myChart = echarts.init(document.getElementById(vm.divId))
+			vm.myChart.setOption({
 				title: {
-					text: this.value + "%",
+					text: this.valueX + "%",
 					subtext: "Core 2",
 					subtextStyle : {
-						color: 'red'
-						// fontStyle: 'normal',
-						// fontWeight: 'normal',
-						// fontSize: 12,
-						// verticalAlign: top
+						color: 'red',
+						fontStyle: 'normal',
+						fontWeight: 'bold',
+						fontSize: 15,
+						// verticalAlign: 
 					},
 					left: "center",
 					top: "center",
@@ -67,9 +81,6 @@ export default {
 						color: this.valueColor
 
 					},
-					subtextStyle: {
-						fontSize: 20
-					}
 				},
 				chart: {
 					height: 180,
