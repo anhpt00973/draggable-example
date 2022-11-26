@@ -1,6 +1,6 @@
 <template>
 <!-- <div> -->
-	<div :id="divId" :valueX="valueX" class="className" :style="{height:height,width:width}" />
+	<div :id="divId" :valueX="valueX" :nameX="nameX" class="className" :style="{height:height,width:width}" />
 <!-- </div> -->
 </template>
 
@@ -34,16 +34,25 @@ export default {
 		valueX: {
 			type: String,
 			default: '0'
+		},
+		nameX: {
+			type: String,
+			default: ''
 		}
+		// inputData: {
+		// 	id: 0,
+		// 	value: 0,
+		// 	name: ''
+		// }
 	},
 	data() {
 		return {
 			myChart: null,
 			value: 30, 
 			valueColor: 'red',
-			insideColor: ['blue', 'grey'],
+			insideColor: ['green', 'grey'],
 			outsideValue1: 80, outsideValue2: 10,
-			outsideColor: [ 'green', 'orange', 'red']
+			outsideColor: [ 'green', 'orange', 'red'],
 			
 		}
 	},
@@ -66,7 +75,7 @@ export default {
 			vm.myChart.setOption({
 				title: {
 					text: this.valueX + "%",
-					subtext: "Core 2",
+					subtext: this.nameX,
 					subtextStyle : {
 						color: 'red',
 						fontStyle: 'normal',
@@ -77,7 +86,7 @@ export default {
 					left: "center",
 					top: "center",
 					textStyle: {
-						fontSize: 30,
+						fontSize: 20,
 						color: this.valueColor
 
 					},
@@ -113,8 +122,8 @@ export default {
 								opacity: 0
 							}
 						},
-						{ value: this.value*60/100, itemStyle: { color: this.insideColor[0] } }, 
-						{ value: 60 - this.value*60/100, itemStyle: { color: this.insideColor[1] } }
+						{ value: this.valueX*60/100, itemStyle: { color: this.insideColor[0] } }, 
+						{ value: 60 - this.valueX*60/100, itemStyle: { color: this.insideColor[1] } }
 						]
 					},
 					{
